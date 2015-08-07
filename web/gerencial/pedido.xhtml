@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>   
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Pedroni Auto Pedroni</title>
+        <style type="text/css">
+            body {background-color: #eeeeee; font-size: 12px}
+        </style> 
+    </h:head>
+    <h:body>
+        <div align="center">
+            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
+                <p:layoutUnit position="north" size="100">  
+                    <h:outputText value="PEDRONI Auto Peças" style="font-size:40px;text-align: left" />
+                    <p:commandButton value="Sair" action="#{loginBean.sair}" />
+                </p:layoutUnit>  
+
+                <p:layoutUnit position="west" size="220">  
+                    <ui:insert name="menu">
+                        <ui:include src="menu.xhtml"/>
+                    </ui:insert>
+                </p:layoutUnit>  
+                <p:layoutUnit position="center">  
+
+                    <p:dataTable var="venda" value="#{orderBean.vendas}">
+                        <f:facet name="header">
+                            Funcionarios
+                            <p:inputText id="nomep" size="40" value="#{orderBean.nomep}" placeholder="Nome do Cliente" />
+                            <p:spacer width="10px"/>
+                            <p:commandButton value="Pesquisar" action="#{orderBean.pesquisar}" />
+                        </f:facet>
+                        <p:column headerText="Placa">
+
+                        </p:column>                            
+                        <p:column headerText="Ordem de Serviço">
+
+                        </p:column>
+                        <p:column headerText="Data">
+
+                        </p:column>
+                        <p:column headerText="Status">
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
+</html>

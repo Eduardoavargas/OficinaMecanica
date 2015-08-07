@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Pedroni Auto Pedroni</title>
+    </h:head>
+    <h:body>
+        <div align="center">
+            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
+                <p:layoutUnit position="north" size="100">  
+                    <h:outputText value="PEDRONI Auto Peças" style="font-size:40px;text-align: left" />
+                </p:layoutUnit>  
+                <p:layoutUnit position="center">  
+                    <h:form id="form"> 
+                        <f:facet name="header">
+                            Ordem de serviço
+                        </f:facet>
+                        <p:dataTable >
+                            <f:facet name="header"> 
+                                Informação do Cliente
+                            </f:facet>
+                            <p:column headerText="Cliente">
+                                <h:outputText value="#{orderBean.cliente.nome}" />
+                            </p:column>                            
+                            <p:column headerText="Data">
+                                <h:outputText value="#{orderBean.data}" />
+                            </p:column>
+                            <p:column headerText="Veiculo">
+                                <h:outputText value="#{orderBean.veiculo.modelo}" />
+                            </p:column>
+                            <p:column headerText="CPF">
+                                <h:outputText value="#{orderBean.veiculo.placa}" />
+                            </p:column>
+                        </p:dataTable>
+                        <p:dataTable var="servico" value="#{orderBean.servicos}">
+                            <f:facet name="header">
+                                Serviços
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputLabel for="peca" value="Peça" />
+                                    <p:inputText id="peca" value="#{orderBean.servicoadd.vendasServico}" required="true" label="Peça" />
+
+                                    <h:outputLabel for="qdt" value="Quantidade" />
+                                    <p:inputText id="qdt" value="#{orderBean.servicoadd.vendasServico}" required="true" label="Quantidade" />
+
+                                    <h:outputLabel for="vluni" value="Valor Unitario" />
+                                    <p:password id="vluni" value="#{orderBean.servicoadd.vendasServico}" required="true" label="Valor " />
+
+                                    <h:outputLabel for="vlg" value="Valor Geral" />
+                                    <p:inputText id="vlg" value="#{orderBean.servicoadd.vendasServico}" required="true" label="Valor" />
+
+                                    <h:outputLabel for="resp" value="Responsavel" />
+                                    <p:inputText id="resp" value="#{orderBean.servicoadd.vendasServico}" required="true" label="Responsavel" />
+                                    
+                                    <h:outputLabel for="status" value="Status" />
+                                    <p:inputText id="status" value="#{orderBean.servicoadd.vendasServico}" required="true" label="Status" />
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Adicionar"  actionListener="#{orderBean.adicionar}"/>
+                                    </f:facet>  
+                                </h:panelGrid>
+                            </f:facet>
+                            <p:column headerText="Peça">
+                                <h:outputText value="#{servico.peca}" />
+                            </p:column>                            
+                            <p:column headerText="Quantidade">
+                                <h:outputText value="#{servico.quantidade}" />
+                            </p:column>
+                            <p:column headerText="Valor Unitario">
+                                <h:outputText value="#{servico.vlunitario}" />
+                            </p:column>
+                            <p:column headerText="Valor Geral">
+                                <h:outputText value="#{servico.vlgeral}" />
+                            </p:column>
+                            <p:column headerText="Responsavel">
+                                <h:outputText value="#{servico.responsavel}" />
+                            </p:column>
+                            <p:column headerText="Status">
+                                <h:outputText value="#{servico.status}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
+</html>
+

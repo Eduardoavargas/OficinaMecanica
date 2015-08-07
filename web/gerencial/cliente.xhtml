@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Pedroni Auto Pedroni</title>
+        <style type="text/css">
+            body {background-color: #eeeeee; font-size: 12px}
+        </style> 
+    </h:head>
+    <h:body>
+        <div align="center">
+            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
+                <p:layoutUnit position="north" size="100">  
+                    <h:outputText value="PEDRONI Auto Peças" style="font-size:40px;text-align: left" />
+                    <p:commandButton value="Sair" action="#{loginBean.sair}" />
+                </p:layoutUnit>  
+
+                <p:layoutUnit position="west" size="220">  
+                    <ui:insert name="menu">
+                        <ui:include src="menu.xhtml"/>
+                    </ui:insert>
+                </p:layoutUnit>  
+                <p:layoutUnit position="center">  
+                    <h:form id="form"> 
+                        <p:dataTable var="cliente" value="#{customerBean.clientes}">
+                            <f:facet name="header">
+                                Clientes
+                                <p:inputText id="nomep" size="40" value="#{customerBean.nome}" placeholder="Nome do cliente" />
+                                <p:spacer width="10px"/>
+                                <p:commandButton value="Pesquisar" action="#{customerBean.pesquisar}" update="@form" />
+                            </f:facet>
+                            <p:column headerText="Name">
+                                <h:outputText value="#{cliente.nome}" />
+                            </p:column>                            
+                            <p:column headerText="Data de Nascimento">
+                                <h:outputText value="#{cliente.nascimento}" />
+                            </p:column>
+                            <p:column headerText="Email">
+                                <h:outputText value="#{cliente.email}" />
+                            </p:column>
+                            <p:column headerText="CPF">
+                                <h:outputText value="#{cliente.cpf}" />
+                            </p:column>
+                            <f:facet name="footer" >
+                                <p:commandButton  value="Cadastrar" icon="ui-icon-extlink" onclick="PF('tela1').show();" />
+                            </f:facet> 
+                        </p:dataTable>
+
+                        <p:dialog header="Cadastro" widgetVar="tela1" resizable="false" width="400">
+                            <!--<p:ajax event="close" update="@all" />-->
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel for="nome" value="Nome" />
+                                <p:inputText id="nome" value="#{customerBean.customer.nome}" required="true" label="Nome" />
+
+                                <h:outputLabel for="email" value="Email" />
+                                <p:inputText id="email" value="#{customerBean.customer.email}" required="true" label="Email" />
+
+                                <h:outputLabel for="cpf" value="CPF" />
+                                <p:inputText id="cpf" value="#{customerBean.cpf}" required="true" label="cpf" />
+
+                                <h:outputLabel for="pass" value="Senha" />
+                                <p:password id="pass" value="#{customerBean.customer.senha}" required="true" label="Senha" />
+
+                                <h:outputLabel for="nasc" value="Data de Nascimento" />
+                                <p:inputText id="nasc" value="#{customerBean.customer.nascimento}" required="true" label="Data de Nascimento" />
+                            </h:panelGrid>
+                            <p:commandButton value="Cadastrar"  action="#{customerBean.salvar}" onclick="PF('tela1').close();"/>
+                        </p:dialog>         
+                    </h:form>
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
+</html>

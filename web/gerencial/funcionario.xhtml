@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Pedroni Auto Pedroni</title>
+        <style type="text/css">
+            body {background-color: #eeeeee; font-size: 12px}
+        </style> 
+    </h:head>
+    <h:body>
+        <div align="center">
+            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
+                <p:layoutUnit position="north" size="100">  
+                    <h:outputText value="PEDRONI Auto Peças" style="font-size:40px;text-align: left" />
+                    <p:commandButton value="Sair" action="#{loginBean.sair}" />
+                </p:layoutUnit>  
+
+                <p:layoutUnit position="west" size="220">  
+                    <ui:insert name="menu">
+                        <ui:include src="menu.xhtml"/>
+                    </ui:insert>
+                </p:layoutUnit>  
+                <p:layoutUnit position="center">  
+                    <h:form id="form">            
+                        <p:dataTable var="funcionario" value="#{officialBean.funcionarios}">
+                            <f:facet name="header">
+                                Funcionarios
+                                <p:inputText id="nomep" size="40" value="#{officialBean.nomep}" placeholder="Nome do funcionario" />
+                                <p:spacer width="10px"/>
+                                <p:commandButton value="Pesquisar" action="#{officialBean.pesquisar}" update="@form" />
+                            </f:facet>
+                            <p:column headerText="Name">
+                                <h:outputText value="#{funcionario.nome}" />
+                            </p:column>                            
+                            <p:column headerText="Data de Nascimento">
+                                <h:outputText value="#{funcionario.nascimento}" />
+                            </p:column>
+                            <p:column headerText="Email">
+                                <h:outputText value="#{funcionario.email}" />
+                            </p:column>
+                            <p:column headerText="CPF">
+                                <h:outputText value="#{funcionario.cpf}" />
+                            </p:column>
+                            <f:facet name="footer" >
+                                <p:commandButton  value="Cadastrar" icon="ui-icon-extlink" onclick="PF('add').show();" />
+                            </f:facet> 
+
+                        </p:dataTable>
+                        <p:dialog header="Cadastro de Funcionario" widgetVar="add" resizable="false">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel for="fristname" value="Nome" />
+                                <p:inputText id="fristname" value="#{officialBean.funcionario.nome}" required="true" label="nome" />
+
+                                <h:outputLabel for="cpf" value="CPF" />
+                                <p:inputText id="cpf" value="#{officialBean.cpf}" required="true" label="cpf" />
+
+                                <h:outputLabel for="pass" value="Senha" />
+                                <p:password id="pass" value="#{officialBean.funcionario.senha}" required="true" label="cpf" />
+
+                                <h:outputLabel for="dtnasc" value="Data de Nascimento" />
+                                <p:inputText id="dtnasc" value="#{officialBean.funcionario.nascimento}" required="true" label="dtnasc" />
+
+                                <h:outputLabel for="email" value="Email" />
+                                <p:inputText id="email" value="#{officialBean.funcionario.email}" required="true" label="email" />
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Cadastrar"  actionListener="#{officialBean.salvar}"/>
+                                </f:facet>  
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
+</html>
